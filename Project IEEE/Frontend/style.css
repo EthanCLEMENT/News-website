@@ -1,0 +1,32 @@
+.left-fieldset {
+    float: left;
+    width: 50%;
+    background-color: #ebe7e7;
+    margin-right: 40%;
+}
+
+legend {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+}
+
+input {
+    margin: 5px;
+}
+
+.submit-button {
+    color: #fff;
+    background-color: #ebe7e7;
+    border-color: #ebe7e7;
+}
+
+.btn-light:hover,
+.btn-light:focus,
+.btn-light:active,
+.btn-light.active,
+.open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #00b3db;
+    border-color: #285e8e;
+}
