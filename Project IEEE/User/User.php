@@ -1,4 +1,5 @@
 <?php
+// getters and setters
 class User{
 
 	private int $id;

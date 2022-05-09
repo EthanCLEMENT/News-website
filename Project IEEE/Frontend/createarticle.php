@@ -1,73 +1,48 @@
 <?php
+
+// call classes from other files 
 function loadClass($class){
     require "../User/$class.php";
 }
-spl_autoload_register("loadClass"); 
 
+spl_autoload_register("loadClass");
+
+// create new article when data are posted
 if ($_POST) {
 
-    $donnees = [
+    // data
+    $datas = [
         "title" => $_POST["title"],
         "content" => $_POST["content"],
         "todaydate" => date("Y-m-d H:i:s"),
         "author" => $_POST["author"]
     ];
 
+    // add a new article in the database
     $articles = new ArticleManager();
-    $articles->add(new Article($donnees));
+    $articles->add(new Article($datas));
 
-    foreach($articles as $article){
-       ?> <div class="card m-5">
-           
-        </div> <?php 
+    foreach ($articles as $article) {
+    ?> 
+    <div class="card m-5">
+
+        </div> <?php
     }
-     echo "<script>window.location.href='index.php'</script>";
-}
-
-?>
+    echo "<script>window.location.href='index.php'</script>";
+        }
+                ?>
 
 <!DOCTYPE html>
-<html lang="fr-FR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/createarticlestyle.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Test</title>
+    <title>Publish an Article</title>
 </head>
-
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .topnav {
-        overflow: hidden;
-        background-color: #333;
-    }
-
-    .topnav a {
-        float: left;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-    }
-
-    .topnav a:hover {
-        background-color: #ddd;
-        color: black;
-    }
-
-    .topnav a.active {
-        background-color: #04AA6D;
-        color: white;
-    }
-</style>
-</head>
+<!-- navbar -->
 <header class="site-header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -78,13 +53,16 @@ if ($_POST) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="../Frontend/index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Frontend/createarticle.php">publish an article</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="../Frontend/login.php">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../Frontend/index.php">Articles</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -95,9 +73,11 @@ if ($_POST) {
         </div>
     </nav>
 </header>
+
 <body>
-   
+
     <div>
+        <!-- form -->
         <form method="post" enctype="multipart/form-data" class="container">
             <br>
             <div align="center">
@@ -119,7 +99,7 @@ if ($_POST) {
             </div>
             <br>
             <div align="center">
-                <input type="submit" value="makearticle" class="btn btn-primary">
+                <input type="submit" value="publish article" class="btn btn-primary">
             </div>
         </form>
     </div>

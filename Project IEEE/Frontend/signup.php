@@ -13,8 +13,10 @@
 <body>
 
     <?php
+    // start the session
     session_start();
     
+    // load managers and controllers
     function loadClass($class)
     {
         require "../User/$class.php";
@@ -22,6 +24,7 @@
 
     spl_autoload_register("loadClass");
 
+    // get user info
     if ($_POST) {
 
         $userData = [
@@ -30,38 +33,40 @@
             "email" => $_POST['email']
         ];
 
+        // get all user
         $existingAccount = False;
         $findExistingUser = new UserManager();
         $users = $findExistingUser->getAll();
 
+        // make sure no empty string can be posted
         if (empty($userData['username'])) {
     ?> <script href="javascript:;">
                 alert("Name is required")
             </script> <?php
                         $existingAccount = True;
                     }
-
+                    // make sure no special characters can be used
                     if (!preg_match("/^[a-zA-Z-' ]*$/", $userData['username'])) {
                         ?> <script href="javascript:;">
                 alert("Only letters and white spaces allowed")
             </script> <?php
                         $existingAccount = True;
                     }
-
+                    
                     if (empty($userData['email'])) {
                         ?> <script href="javascript:;">
                 alert("Email is required")
             </script> <?php
                         $existingAccount = True;
                     }
-
+                    // valid email format
                     if (!filter_var($userData['email'], FILTER_VALIDATE_EMAIL)) {
                         ?> <script href="javascript:;">
                 alert("Invalid email format")
             </script> <?php
                         $existingAccount = True;
                     }
-
+                    // make sure username address does not exist in the database
                     foreach ($users as $user) {
                         if ($user->getUsername() == $userData['username']) {
                         ?> <script href="javascript:;">
@@ -71,6 +76,7 @@
                             break;
                         }
                     }
+                    // make sure email address does not exist in the database
                     foreach ($users as $user) {
                         if ($user->getEmail() == $userData['email'] && $existingAccount == False) {
                             ?> <script href="javascript:;">
@@ -80,9 +86,10 @@
                             break;
                         }
                     }
+                    // add user in database
                     if ($existingAccount == False) {
                         $findExistingUser->add(new User($userData));
-                        echo "<script>window.location.href= '../Frontend/Homepage.php'</script>";
+                        echo "<script>window.location.href= '../Frontend/index.php'</script>";
                     }
                 }
                     ?>
@@ -98,13 +105,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="../Frontend/index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Frontend/createarticle.php">publish an article</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="../Frontend/login.php">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../Frontend/signup.php">Sign in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../Frontend/index.php">Articles</a>
                     </li>
                 </ul>
                 <form class="d-flex">

@@ -1,3 +1,20 @@
+@media(min-width: 280px) and (max-width: 500px) {
+    .threadreading {
+        background-color: #191919;
+        margin-left: 5%;
+        margin-right: 5%;
+        border-radius: 20px;
+    }
+    .montitre {
+        font-size: 4.5mm;
+    }
+    .affichagetexte {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 3.5mm;
+    }
+}
+
 .left-fieldset {
     float: left;
     width: 50%;

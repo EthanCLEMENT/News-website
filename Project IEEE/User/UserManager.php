@@ -1,5 +1,5 @@
 <?php 
-
+// interact with database : add users, update user...
 class UserManager{
     private $db;
 

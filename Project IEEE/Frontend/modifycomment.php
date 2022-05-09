@@ -10,43 +10,45 @@
 
 <body>
 <?php
-    // modify article
+    // modify comment
     function loadClass($class){
         require "../User/$class.php";
     }
 
     spl_autoload_register('loadClass');
 
-    $manager = new ArticleManager();
+    $manager = new CommentManager();
 
     if ($_GET) {
-        $article = $manager->get($_GET['id']);
-       
+        $comment = $manager->get($_GET['id']);
+
     }
 
     if ($_POST) {
         $donnees = [
             "id" => $_GET["id"],
-            "title" => $_POST["title"],
             "content" => $_POST["content"],
-            "author" => $_POST["author"],
+            "author" => $_POST["author"]
         ];
 
-        $manager->update(new Article($donnees));
-
-        header("Location: ../Frontend/index.php?id={$_GET["id"]}");
+        $article_id = $comment->getArticleid(); 
         
+
+        $manager->update(new Comment($donnees));
+        header("Location: ../Frontend/index.php");
+
+        //header("Location: ./read.php?id={$_GET["id"]}");
     }
+
+
 ?>
 
 <form method="POST" class="container">
-    <h2>Modify article</h2>
-        <label>Title :</label>
-        <input type="text" name="title" id="title" class="form-control" value="<?= $article->getTitle(); ?>">
+    <h2>Modify Comment</h2>
         <label>Content :</label>
-        <textarea type="text" name="content" id="content" class="form-control"><?= $article->getContent(); ?></textarea>
+        <textarea type="text" name="content" id="content" class="form-control"><?= $comment->getContent(); ?></textarea>
         <label>Author :</label>
-        <input type="text" name="author" id="author" class="form-control" value="<?= $article->getAuthor(); ?>">
+        <input type="text" name="author" id="author" class="form-control" value="<?= $comment->getAuthor(); ?>">
         <input type="submit" value="update" class="btn btn-primary">
     </form>
 </body>

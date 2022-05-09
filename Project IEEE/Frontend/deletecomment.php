@@ -7,11 +7,13 @@ function loadClass(string $class)
     }
     spl_autoload_register("loadClass");
 
-$manager = new ArticleManager();
+$manager = new CommentManager();
 
 // delete article 
 if ($_GET) {
+    $comment = $manager->get($_GET['id']);
+    $test = $comment->getArticleid();
     $manager->delete($_GET['id']);
-    echo "<script>window.location.href='index.php'</script>";
+    header("Location: ../Frontend/index.php");
 }
 ?>

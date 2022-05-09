@@ -1,10 +1,11 @@
 <?php 
+// getters and setters
 class Comment{
     private $id; 
     private $content;
     private $todaydate;
     private $author;
-    private $articleid;
+    private $article_id;
 
     public function __construct(array $comments){
 		$this->hydrate($comments);
@@ -36,7 +37,7 @@ class Comment{
     }
 
     public function getArticleid(){
-        return $this->articleid;
+        return $this->article_id;
     }
 
     public function setId($id){
@@ -63,9 +64,9 @@ class Comment{
         }
     }
 
-    public function setArticleid($articleid){
-        if(is_String($articleid)){
-            $this->articleid = $articleid;
+    public function setArticleid($article_id){
+        if(is_String($article_id)){
+            $this->article_id = $article_id;
         }
     }
 }

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Home Page | MIT CSAIL</title>
 </head>
 <header class="site-header">
@@ -41,7 +41,6 @@
     </nav>
 </header>
 <body>
-
     
     <?php 
     function loadClass($class){
@@ -51,17 +50,15 @@
 
     $articleManager = new ArticleManager();
 
-    $articles = $articleManager->getAllByAsc();
-    if($_POST){
-    if (!isset($_POST['title'])) {
-        $filter = "";
-    } else {
-    $filter = $_POST['title'];
-}
-    
-        foreach($articleManager->getAllSearch($filter) as $article){
-           
-             // display article from search bar
+    $articles = $articleManager->getAll();
+
+    if ($_POST) {
+        $datas = [
+            "title" => $_POST["title"],  
+        ];
+        foreach($articles as $article){
+            // display article from search bar
+            if($article->getTitle() == $datas['title']){
                 ?>
                 <div class="card m-5" style="width: 15%;border: solid; border-radius: 10px;">
                 
@@ -75,9 +72,10 @@
                 </div>
             </div>
           <?php  } ?>
-      <?php } ?>
-      <?php // display articles ?>
- <a href="../Frontend/indexAsc.php" class="btn btn-primary">Sort by the newest articles first</a>
+     <?php   } ?>
+ <?php } ?>
+ <?php //display articles ?>
+ <a href="../Frontend/index.php" class="btn btn-primary">Sort by the oldest articles first</a>
  <a href="../Frontend/indexTitlesASC.php" class="btn btn-primary"> sort by A-Z</a>
  <a href="../Frontend/indexTitlesDESC.php" class="btn btn-primary"> sort by Z-A</a>
     <div class="d-flex flex-wrap justify-content-around">
