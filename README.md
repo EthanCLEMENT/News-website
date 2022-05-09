@@ -13,7 +13,7 @@ The entire website was coded in HTML5, CSS, MySQL and PHP. In order to run it, y
 ```
 https://www.mamp.info/en/windows/.
 ```
-Once MAMP ( or any other local server ) is be installed, you can copy paste the following URL :
+Once MAMP ( or any other local server ) is installed, you can copy paste the following URL :
 ```
 http://localhost/Project%20IEEE/Homepage.php# 
 ```
